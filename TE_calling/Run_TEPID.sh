@@ -15,3 +15,5 @@ tepid-map -x /cluster/scratch/rhorvath/reference_genome/bowtie2_ref_index/Bdista
 tepid-discover -p 1 -n v -c Ko3.bam -s Ko3.split.bam -t /cluster/scratch/rhorvath/TE_annotation/Bdistachyon_314_v3.0.fa.mod.EDTA.TEanno.bed
 
 
+
+
