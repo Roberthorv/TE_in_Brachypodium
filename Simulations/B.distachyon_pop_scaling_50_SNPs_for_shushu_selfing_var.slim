@@ -1,1 +1,122 @@
+// Simulate brachypodium distachyon
+// Scaling: 50 (Nμ, Nr, Ns)
+
+// Ne start: 100000
+// Ne A: 40000
+// Ne B: 50000
+
+// Ne A Italia: 20000
+// Ne B East: 15000
+// Ne B West: 40000
+// Ne A East: 25000
+
+// Mutation rate: 1e-7
+// Recombination rate: 1e-8
+
+// Rescaled mutation rate: 5e-6
+// Rescaled recombination rate: 5e-6
+// Rescaled starting Ne: 2000
+
+// A B split: t0 = 0
+// A split: tA = 34000
+// B split: tB = 30000
+// End time: tE = 52000
+// Stritt 2021
+
+// Rescaled tA: 680
+// Rescaled tB: 600
+// Rescaled tB: 1040
+
+// No migration between populations 
+
+// chomosom length: 500000 (500kb)
+
+// Ne start 2000 10Ne 20000
+
+// S = Ne*s
+// S = -10 <=> s=-10/2000= -0.005
+
+
+// need more generations
+
+initialize() {
+	// get the values from the input flags
+	defineConstant("run_N", run);                           // run number
+	defineConstant("name_out", name);                       // run name (used in the output file naming)
+	defineConstant("neg_sel", negative);                    // negative selection
+	defineConstant("prop_sel", proportion);                 // proportioon of negative selection
+        defineConstant("self_rat", selfing);                        // proportioon of selfing
+	
+	
+	initializeMutationRate(5e-6);
+	
+	initializeMutationType("m1", 0.5, "f", 0.0);            // neutral
+	initializeMutationType("m2", 0.5, "f", neg_sel);        // deleterious
+	initializeMutationType("m3", 0.5, "f", 0.0);            // synonymous
+	
+	initializeGenomicElementType("g1", c(m1,m2,m3), c(0.5 - 0.5*prop_sel, 0.5*prop_sel, 0.5));
+	initializeGenomicElement(g1, 0, 999999);
+	initializeRecombinationRate(5e-5);
+}
+
+1 early() { 
+sim.addSubpop("p1", 2000);
+p1.setSelfingRate(self_rat);
+ }
+// burn in phase 
+
+
+2140 early() { print("10%"); }
+4280 early() { print("20%"); }
+6320 early() { print("30%"); }
+8460 early() { print("40%"); }
+10520 early() { print("50%"); }
+12640 early() { print("60%"); }
+14780 early() { print("70%"); }
+16820 early() { print("80%"); }
+18960 early() { print("90%"); }
+
+
+// Split A and B
+20000 early() {
+	sim.addSubpopSplit("p2", 800, p1);
+	sim.addSubpopSplit("p3", 1000, p1);
+	p2.setSelfingRate(self_rat);
+	p3.setSelfingRate(self_rat);
+}
+20001 early() { p1.setSubpopulationSize(0); }
+
+// Split B
+20600 early() {
+	sim.addSubpopSplit("p31", 300, p3);
+	sim.addSubpopSplit("p32", 800, p3);
+	p31.setSelfingRate(self_rat);
+	p32.setSelfingRate(self_rat);
+}
+20601 early() { p3.setSubpopulationSize(0); }
+
+// Split A
+20680 early() {
+	sim.addSubpopSplit("p21", 500, p2);
+	sim.addSubpopSplit("p22", 400, p2);
+	p21.setSelfingRate(self_rat);
+	p22.setSelfingRate(self_rat);
+}
+20681 early() { p2.setSubpopulationSize(0); }
+
+// if sampling the pop is needed
+//2103 late() {
+//	p32.setSubpopulationSize(15);
+//}
+
+// curent generation: end of the simulation
+21040 late() {
+	// write out the result files
+	p32.outputVCFSample(sampleSize = 72, replace = F, outputMultiallelics = F, filePath = paste("./Results/" + name_out + "_selfing_" + self_rat + "_higher_rec_B_West_run_" + run_N + ".vcf"), simplifyNucleotides = T, outputNonnucleotides = F);
+	p31.outputVCFSample(sampleSize = 69, replace = F, outputMultiallelics = F, filePath = paste("./Results/" + name_out + "_selfing_" + self_rat + "_higher_rec_B_East_run_" + run_N + ".vcf"), simplifyNucleotides = T, outputNonnucleotides = F);
+	p22.outputVCFSample(sampleSize = 92, replace = F, outputMultiallelics = F, filePath = paste("./Results/" + name_out + "_selfing_" + self_rat + "_higher_rec_A_East_run_" + run_N + ".vcf"), simplifyNucleotides = T, outputNonnucleotides = F);
+	p21.outputVCFSample(sampleSize = 66, replace = F, outputMultiallelics = F, filePath = paste("./Results/" + name_out + "_selfing_" + self_rat + "_higher_rec_A_Italia_run_" + run_N + ".vcf"), simplifyNucleotides = T, outputNonnucleotides = F);
+
+
+}
 
