@@ -20,6 +20,13 @@ merge_deletions.py -f deletions
 
 tepid-refine -i /cluster/work/gdc/people/rhorvath/TEPID_output/insertions.bed -d /cluster/work/gdc/people/rhorvath/TEPID_output/deletions.bed -p 4 -t /cluster/work/gdc/people/rhorvath/Reference/TE_annotation/Bdistachyon_314_v3.0.fa.mod.EDTA.TEanno.bed -n Ko3 -c Ko3.bam -s Ko3.split.bam -a /cluster/work/gdc/people/rhorvath/TEPID_output/ALL_Sample_names.txt
 
+# genotyping
+merge_insertions.py -f refined_insertions 
+merge_deletions.py -f refined_deletions
+merge_insertions.py -f ambiguous_insertion 
+merge_deletions.py -f ambiguous_deletion
 
+genotype.py -d -a ambiguous_deletion.bed -m refined_deletions.bed -s ALL_Sample_names.txt -r Bd21_REF > deletions_genotypes.bed
+genotype.py -i -a ambiguous_insertion.bed -m refined_insertions.bed -s ALL_Sample_names.txt -r Bd21_REF > insertions_genotypes.bed
 
 
