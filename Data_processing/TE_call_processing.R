@@ -157,11 +157,11 @@ no_need_for_merging_TE_calls[,1:4] <- unlist(TE_info_full_TIP_Sample_sorted[need
 no_need_for_merging_TE_calls[,6:352] <- unlist(TE_info_full_TIP_Sample_sorted[need_merge[,2] == "No",5:351])
 
 Full_merged_TE_calls <- rbind(TAP_no_need_for_merging_TE_calls, no_need_for_merging_TE_calls, merged_TE_calls)
-Full_merged_TE_calls_df <- as.data.frame(Full_merged_TE_calls)
-for  (o in 11:dim(Full_merged_TE_calls_df)[2]){
-    Full_merged_TE_calls_df[,o] <- as.numeric(Full_merged_TE_calls_df[,o])
+Full_clean_TIP_TAP_Sample_table_342_samples <- as.data.frame(Full_merged_TE_calls)
+for  (o in 11:dim(Full_clean_TIP_TAP_Sample_table_342_samples)[2]){
+    Full_clean_TIP_TAP_Sample_table_342_samples[,o] <- as.numeric(Full_clean_TIP_TAP_Sample_table_342_samples[,o])
   }
-write.table(Full_merged_TE_calls_df, file = "Full_merged_TE_calls_df.txt", sep = "\t", quote = FALSE, row.names = FALSE)
+write.table(Full_clean_TIP_TAP_Sample_table_342_samples, file = "Full_clean_TIP_TAP_Sample_table_342_samples.txt", sep = "\t", quote = FALSE, row.names = FALSE)
 
 
 
