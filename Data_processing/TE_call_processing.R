@@ -68,14 +68,16 @@ for (y in (dim(insertions)[1] +1):(dim(insertions)[1] + dim(deletions)[1])) {
 
 
 # Make a TE info table
-TE_info <- as.data.frame(matrix(NA, nrow = sum(dim(insertions)[1], dim(deletions)[1]), ncol = 6))
-colnames(TE_info) <- c("TE_ID", "Scaffold", "Start_position", "End_position", "TE_name", "TE_family")
+TE_info <- as.data.frame(matrix(NA, nrow = sum(dim(insertions)[1], dim(deletions)[1]), ncol = 8))
+colnames(TE_info) <- c("Scaffold", "Start_position", "End_position", "TE_ID", "TE_name", "TE_family", "Note_1", "Note_2")
 TE_info$TE_ID <- c(insertions$ID, deletions$ID)
 TE_info$Scaffold <- c(insertions$Scaffold, deletions$Scaffold)
 TE_info$Start_position <- c(insertions$Insertion_site_lower_estimate, deletions$Start_position)
 TE_info$End_position <- c(insertions$Insertion_site_upper_estimate, deletions$End_position)
 TE_info$TE_name <- c(insertions$TE_name, deletions$TE_name)
 TE_info$TE_family <- c(insertions$TE_family, deletions$TE_family)
+TE_info$Note_1 <- NA
+TE_info$Note_2 <- NA
 write.table(TE_info, file = "TE_info.txt", sep = "\t", header = TRUE)
 
 # merge tables
@@ -86,20 +88,20 @@ Full_TIP_TAP_Sample_table_with_ID <- merge(x = TE_info, y = Full_TIP_TAP_Sample_
 TE_info_full_TIP_Sample_sorted <- Full_TIP_TAP_Sample_table_with_ID[grep("TIP",Full_TIP_TAP_Sample_table_with_ID[,1]),]
 
 need_merge <- matrix(NA, ncol = 3, nrow = dim(TE_info_full_TIP_Sample_sorted)[1])
-need_merge[,1] <- TE_info_full_TIP_Sample_sorted[,1]
+need_merge[,1] <- TE_info_full_TIP_Sample_sorted[,4]
 
 need_merge[,2] <- unlist(sapply(1:dim(TE_info_full_TIP_Sample_sorted)[1], function(r){
-  my_scaff <- TE_info_full_TIP_Sample_sorted[r,2]
-  my_start_window <- TE_info_full_TIP_Sample_sorted[r,3] - 100
-  my_end_window <- TE_info_full_TIP_Sample_sorted[r,4] + 100
+  my_scaff <- TE_info_full_TIP_Sample_sorted[r,1]
+  my_start_window <- TE_info_full_TIP_Sample_sorted[r,2] - 100
+  my_end_window <- TE_info_full_TIP_Sample_sorted[r,3] + 100
   
-  my_tab_for_merge <- TE_info_full_TIP_Sample_sorted[c(TE_info_full_TIP_Sample_sorted[,2] == my_scaff & TE_info_full_TIP_Sample_sorted[,3] >=  my_start_window & TE_info_full_TIP_Sample_sorted[,3] <= my_end_window) |
-                                                           c(TE_info_full_TIP_Sample_sorted[,2] == my_scaff & TE_info_full_TIP_Sample_sorted[,4] >=  my_start_window & TE_info_full_TIP_Sample_sorted[,4] <= my_end_window),]
+  my_tab_for_merge <- TE_info_full_TIP_Sample_sorted[c(TE_info_full_TIP_Sample_sorted[,1] == my_scaff & TE_info_full_TIP_Sample_sorted[,2] >=  my_start_window & TE_info_full_TIP_Sample_sorted[,2] <= my_end_window) |
+                                                           c(TE_info_full_TIP_Sample_sorted[,1] == my_scaff & TE_info_full_TIP_Sample_sorted[,3] >=  my_start_window & TE_info_full_TIP_Sample_sorted[,3] <= my_end_window),]
   
-  if (length(my_tab_for_merge[my_tab_for_merge[,5] == TE_info_full_TIP_Sample_sorted[r,5],1]) == 1) {
+  if (length(my_tab_for_merge[my_tab_for_merge[,5] == TE_info_full_TIP_Sample_sorted[r,5],4]) == 1) {
     return("No")
   } else{
-    return(paste(my_tab_for_merge[my_tab_for_merge[,5] == TE_info_full_TIP_Sample_sorted[r,5],1], collapse = ","))
+    return(paste(my_tab_for_merge[my_tab_for_merge[,5] == TE_info_full_TIP_Sample_sorted[r,5],4], collapse = ","))
   }
 }))
 
@@ -124,25 +126,33 @@ need_merge[,3] <- unlist(sapply(1:dim(TE_info_full_TIP_Sample_sorted)[1], functi
 lines_to_merge <- unique(need_merge[!is.na(need_merge[,3]),3])
 
 merged_TE_calls <- matrix(NA, nrow = length(lines_to_merge), ncol = (1 + dim(TE_info_full_TIP_Sample_sorted)[2]))
-colnames(merged_TE_calls) <- c(colnames(TE_info_full_TIP_Sample_sorted[1:4]), "merged_TE_ID",colnames(TE_info_full_TIP_Sample_sorted)[5:349])
+colnames(merged_TE_calls) <- c(colnames(TE_info_full_TIP_Sample_sorted[1:4]), "merged_TE_ID",colnames(TE_info_full_TIP_Sample_sorted)[5:351])
 
 for (l in 1:length(lines_to_merge)) {
   my_lines_full <- TE_info_full_TIP_Sample_sorted[as.numeric(unlist(strsplit(lines_to_merge[l], split = ","))),]
-  merged_TE_calls[l,1:3] <- unlist(my_lines_full[1,2:4])
-  merged_TE_calls[l,4] <- paste0(my_lines_full[1,1], ".1")
-  merged_TE_calls[l,5] <- paste(my_lines_full[,1], collapse = ",")
+  merged_TE_calls[l,1:3] <- unlist(my_lines_full[1,1:3])
+  merged_TE_calls[l,4] <- paste0(my_lines_full[1,4], ".1")
+  merged_TE_calls[l,5] <- paste(my_lines_full[,4], collapse = ",")
   merged_TE_calls[l,6:10] <- unlist(my_lines_full[1,5:9])
-  counts <- colSums(my_lines_full[,10:349])
+  counts <- colSums(my_lines_full[,10:351])
   counts[counts>1 & !is.na(counts)] <- 1
-  merged_TE_calls[l,11:350] <- counts
+  merged_TE_calls[l,11:352] <- counts
 }
 
-TE_info_full_TAP_Sample_sorted <- Full_TIP_TAP_Sample_table_with_ID[grep("TAP",Full_TIP_TAP_Sample_table_with_ID[,1]),]
+TE_info_full_TAP_Sample_sorted <- TE_info_full_TIP_TAP_Sample_sorted[grep("TAP",TE_info_full_TIP_TAP_Sample_sorted[,4]),]
 
 TAP_no_need_for_merging_TE_calls <- matrix(NA, nrow = dim(TE_info_full_TAP_Sample_sorted)[1], ncol = (1 + dim(TE_info_full_TAP_Sample_sorted)[2]))
-colnames(TAP_no_need_for_merging_TE_calls) <- c(colnames(TE_info_full_TAP_Sample_sorted[1:4]), "merged_TE_ID",colnames(TE_info_full_TAP_Sample_sorted)[5:349])
+colnames(TAP_no_need_for_merging_TE_calls) <- c(colnames(TE_info_full_TAP_Sample_sorted[1:4]), "merged_TE_ID",colnames(TE_info_full_TAP_Sample_sorted)[5:351])
 TAP_no_need_for_merging_TE_calls[,1:4] <- unlist(TE_info_full_TAP_Sample_sorted[,1:4])
-TAP_no_need_for_merging_TE_calls[,6:350] <- unlist(TE_info_full_TAP_Sample_sorted[,5:349])
+TAP_no_need_for_merging_TE_calls[,6:352] <- unlist(TE_info_full_TAP_Sample_sorted[,5:351])
+
+no_need_for_merging_TE_calls <- matrix(NA, nrow = dim(TE_info_full_TIP_Sample_sorted[need_merge[,2] == "No",])[1], ncol = (1 + dim(TE_info_full_TIP_Sample_sorted)[2]))
+colnames(no_need_for_merging_TE_calls) <- c(colnames(TE_info_full_TIP_Sample_sorted[1:4]), "merged_TE_ID",colnames(TE_info_full_TIP_Sample_sorted)[5:351])
+no_need_for_merging_TE_calls[,1:4] <- unlist(TE_info_full_TIP_Sample_sorted[need_merge[,2] == "No",1:4])
+no_need_for_merging_TE_calls[,6:352] <- unlist(TE_info_full_TIP_Sample_sorted[need_merge[,2] == "No",5:351])
+
+Full_merged_TE_calls <- rbind(TAP_no_need_for_merging_TE_calls, no_need_for_merging_TE_calls, merged_TE_calls)
+write.table(Full_merged_TE_calls, file = "Full_merged_TE_calls.txt", sep = "\t", quote = FALSE, row.names = FALSE)
 
 
 
