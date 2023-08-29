@@ -6,6 +6,7 @@ library(memuse, lib.loc = "./R_packages/")
 
 print(args)
 
+## the small_mock_vcf_for_TEs.vcf file is a vcf with 1000 calls that will be used as atamplate in this code.
 vcf <- read.vcfR("./small_mock_vcf_for_TEs.vcf", verbose = FALSE )
 Full_clean_TIP_TAP_Sample_table_342_samples <- read.table("./Full_clean_TIP_TAP_Sample_table_342_samples.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 
