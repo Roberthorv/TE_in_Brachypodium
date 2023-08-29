@@ -81,6 +81,7 @@ sed -i -e 's/Bd21_Stritt/Bd21/g' For_Yann_clean_TE_call_TEPID.vcf
 grep -v "scaffold\|Bd1_centromere_containing_Bradi1g" For_Yann_clean_TE_call_TEPID.vcf > For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5.vcf
 
 ## make sure no site is duplicated:
+## For sites that are present in the TE vcf and SNP vcf, the position in the TE vcf will be adjusted so that it dose not overlap with a SNP.
 cut -f 1-2 Bdis332_SNPs_Yann_for_merge.vcf | grep -v "#" | tr "\t" "_" > position_Yann
 cut -f 1-2 For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5.vcf | grep -v "#" | tr "\t" "_" > position_TE
 cat position_Yann position_TE | sort | uniq -c | grep -v "1 " > duplicated_sites
@@ -157,51 +158,17 @@ cat position_Yann position_TE_2 | sort | uniq -c | grep -v "1 " > duplicated_sit
 rm position_Yann position_TE position_TE_2 duplicated_sites
 
 ## sort vcf 
-module load gdc vcftools/0.1.16
 vcf-sort For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions.vcf > For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf
 
-
-## split into TIP and TAP:
-head -25 For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf > head_vcf
-grep "TIP" For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf > TIP_vcf
-grep "TAP" For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf > TAP_vcf
-
-cat head_vcf TIP_vcf > Bdis332_clean_TIP_call_TEPID.vcf
-cat head_vcf TAP_vcf > Bdis332_clean_TAP_call_TEPID.vcf
-
-rm head_vcf TAP_vcf TIP_vcf
-
-
 ## index vcf
-
-gatk IndexFeatureFile -F /cluster/work/gdc/people/rhorvath/vcf_files/For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf
-gatk IndexFeatureFile -F /cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_clean_TIP_call_TEPID.vcf
-gatk IndexFeatureFile -F /cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_clean_TAP_call_TEPID.vcf
-gatk IndexFeatureFile -F /cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_SNPs_Yann_for_merge.vcf
+gatk IndexFeatureFile -F ./For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf
+gatk IndexFeatureFile -F ./Bdis332_clean_TIP_call_TEPID.vcf
+gatk IndexFeatureFile -F ./Bdis332_clean_TAP_call_TEPID.vcf
+gatk IndexFeatureFile -F ./Bdis332_SNPs_Yann_for_merge.vcf
 
 
 ## merge SNP and TEs
 gatk MergeVcfs -I Bdis332_SNPs_Yann_for_merge.vcf -I For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf -O Bdis332_SNPs_Yann_clean_TE_TEPID.vcf
 
-gatk MergeVcfs -I Bdis332_SNPs_Yann_for_merge.vcf -I Bdis332_clean_TIP_call_TEPID.vcf -O Bdis332_SNPs_Yann_clean_TIP_TEPID.vcf
-
-gatk MergeVcfs -I Bdis332_SNPs_Yann_for_merge.vcf -I Bdis332_clean_TAP_call_TEPID.vcf -O Bdis332_SNPs_Yann_clean_TAP_TEPID.vcf
-
-
 gzip Bdis332_SNPs_Yann_clean_TE_TEPID.vcf
-gzip Bdis332_SNPs_Yann_clean_TIP_TEPID.vcf
-gzip Bdis332_SNPs_Yann_clean_TAP_TEPID.vcf
-
-## get the results
-scp rhorvath@euler.ethz.ch:/cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_SNPs_Yann_cleab_TE_TEPID.vcf.gz .
-scp rhorvath@euler.ethz.ch:/cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_SNPs_Yann_clean_TAP_TEPID.vcf.gz .
-scp rhorvath@euler.ethz.ch:/cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_SNPs_Yann_clean_TIP_TEPID.vcf.gz .
-
-scp rhorvath@euler.ethz.ch:/cluster/work/gdc/people/rhorvath/vcf_files/For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf.gz .
-scp rhorvath@euler.ethz.ch:/cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_clean_TIP_call_TEPID.vcf.gz .
-scp rhorvath@euler.ethz.ch:/cluster/work/gdc/people/rhorvath/vcf_files/Bdis332_clean_TAP_call_TEPID.vcf.gz .
-
-mv For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf.gz Bdis332_clean_TE_call_TEPID.vcf.gz
-
-
 
