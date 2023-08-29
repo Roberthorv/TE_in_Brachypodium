@@ -159,8 +159,6 @@ vcf-sort For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions.vcf > For_Y
 
 ## index vcf
 gatk IndexFeatureFile -F ./For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5_corrected_positions_sorted.vcf
-gatk IndexFeatureFile -F ./Bdis332_clean_TIP_call_TEPID.vcf
-gatk IndexFeatureFile -F ./Bdis332_clean_TAP_call_TEPID.vcf
 gatk IndexFeatureFile -F ./Bdis332_SNPs_Yann_for_merge.vcf
 
 
