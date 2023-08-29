@@ -73,12 +73,9 @@ sed -i -e 's/BdTR3M/SRR4164007/g' head_Yann
 
 cat head_Yann Bdis332_SNPs_Yann_body > Bdis332_SNPs_Yann_for_merge.vcf
 
-## select the sample to includ: 
-gatk SelectVariants -R ./Bdistachyon_556_v3.0.fa -V ./Full_clean_TE_call_TEPID.vcf --exclude-sample-expressions SRR1800522 --exclude-sample-expressions Cef2 --exclude-sample-expressions Pob1 --exclude-sample-expressions D26 --exclude-sample-expressions ABR8 --exclude-sample-expressions Bd21Control_1 --exclude-sample-expressions Bd21Control_2 --exclude-sample-expressions Bd21Control_3 --exclude-sample-expressions Bd21_Skalska --exclude-sample-expressions D73 --exclude-non-variants true -O ./For_Yann_clean_TE_call_TEPID.vcf
-
 ## Adjust ref name:
-sed -i -e 's/Bd21_Stritt/Bd21/g' For_Yann_clean_TE_call_TEPID.vcf
-grep -v "scaffold\|Bd1_centromere_containing_Bradi1g" For_Yann_clean_TE_call_TEPID.vcf > For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5.vcf
+sed -i -e 's/Bd21_Stritt/Bd21/g' Bdis326_clean_TE_call_TEPID.vcf
+grep -v "scaffold\|Bd1_centromere_containing_Bradi1g" Bdis326_clean_TE_call_TEPID.vcf > For_Yann_clean_TE_call_TEPID_Bd1_to_Bd5.vcf
 
 ## make sure no site is duplicated:
 ## For sites that are present in the TE vcf and SNP vcf, the position in the TE vcf will be adjusted so that it dose not overlap with a SNP.
