@@ -646,78 +646,15 @@ delta_freq_decile_All_boot_freq_matched_B_West <- matrix(unlist(sapply(1:n_boot,
 })), nrow = n_boot, ncol = Nbin, byrow = TRUE)
 
 
-my_labels_A_East <- c()
-for (h in 1:Nbin) {
-  my_labels_A_East <- c(my_labels_A_East, paste0(round(my_bonderies_A_East[h], 0), "\n-\n", round(my_bonderies_A_East[h+1], 0)))
-}
-my_labels_A_Italia <- c()
-for (h in 1:Nbin) {
-  my_labels_A_Italia <- c(my_labels_A_Italia, paste0(round(my_bonderies_A_Italia[h], 0), "\n-\n", round(my_bonderies_A_Italia[h+1], 0)))
-}
-my_labels_B_East <- c()
-for (h in 1:Nbin) {
-  my_labels_B_East <- c(my_labels_B_East, paste0(round(my_bonderies_B_East[h], 0), "\n-\n", round(my_bonderies_B_East[h+1], 0)))
-}
-my_labels_B_West <- c()
-for (h in 1:Nbin) {
-  my_labels_B_West <- c(my_labels_B_West, paste0(round(my_bonderies_B_West[h], 0), "\n-\n", round(my_bonderies_B_West[h+1], 0)))
-}
 
-## plotting
 
-library(scales)
-my_at <- as.vector(rbind(1:Nbin, 1:Nbin, 1:Nbin))
-my_plot_seq <- as.vector(rbind(c(1:Nbin), c((Nbin+1):(2*Nbin)), c((2*Nbin+1):(3*Nbin))))
+## add do the same with SNPs
 
-pdf(file = "./plot_beta_freq_adj.pdf", width = 11)
-par(mfrow = c(2, 2), mar=c(8.3, 4, 1.8, 0.8))
-##par(mfrow = c(2, 2), xpd=TRUE)
 
-boxplot(delta_freq_decile_All_boot_freq_matched_A_East,
-        col = "#96127d", xlab = "", ylab = "", cex.lab = 1.5, cex.axis = 1.5, cex.main = 2, main = "", 
-        names = 1:Nbin, xaxt = "n", 
-        at = 1:Nbin)
-points(x = 1:Nbin, y = delta_freq_decile_All_resample_freq_matched_A_East, pch = 20, col = 8)
-title(xlab = "Age bins", mgp = c(6.7, 1, 0), cex.lab = 1.5)
-title(ylab = expression(paste(Delta, " frequency")), mgp = c(2.5, 1, 0), cex.lab = 1.5)
-abline(h = 0, lty = 3)
-text(x = my_at + 0.4, y = rep(-0.23, 45), my_names_A_East, srt = 75, xpd = TRUE, cex = 1.25, pos = 2)
-mtext("A East", side = 3, at = 1, line = 0.5, cex = 1.3)
 
-boxplot(delta_freq_decile_All_boot_freq_matched_A_Italia,
-        col = "#21908c", xlab = "", ylab = "", cex.lab = 1.5, cex.axis = 1.5, cex.main = 2, main = "", 
-        names = 1:Nbin, xaxt = "n", 
-        at = 1:Nbin)
-points(x = 1:Nbin, y = delta_freq_decile_All_resample_freq_matched_A_Italia, pch = 20, col = 8)
-abline(h = 0, lty = 3)
-title(xlab = "Age bins", mgp = c(6.7, 1, 0), cex.lab = 1.5)
-title(ylab = expression(paste(Delta, " frequency")), mgp = c(2.5, 1, 0), cex.lab = 1.5)
-text(x = my_at + 0.4, y = rep(-0.24, 45), my_names_A_Italia, srt = 75, xpd = TRUE, cex = 1.25, pos = 2)
-mtext("A Italia", side = 3, at = 1, line = 0.5, cex = 1.3)
 
-boxplot(delta_freq_decile_All_boot_freq_matched_B_West,
-        col = "#3B528BFF", xlab = "", ylab = "", cex.lab = 1.5, cex.axis = 1.5, cex.main = 2, main = "", 
-        names = 1:Nbin, xaxt = "n", 
-        at = 1:Nbin)
-points(x = 1:Nbin, y = delta_freq_decile_All_resample_freq_matched_B_West, pch = 20, col = 8)
-abline(h = 0, lty = 3)
-title(xlab = "Age bins", mgp = c(6.7, 1, 0), cex.lab = 1.5)
-title(ylab = expression(paste(Delta, " frequency")), mgp = c(2.5, 1, 0), cex.lab = 1.5)
-text(x = my_at + 0.4, y = rep(-0.315, 45), my_names_B_West, srt = 75, xpd = TRUE, cex = 1.25, pos = 2)
-mtext("B West", side = 3, at = 1, line = 0.5, cex = 1.3)
 
-boxplot(delta_freq_decile_All_boot_freq_matched_B_East,
-        col = "#5DC863FF", xlab = "", ylab = "", cex.lab = 1.5, cex.axis = 1.5, cex.main = 2, main = "", 
-        names = 1:Nbin, xaxt = "n", 
-        at = 1:Nbin)
-points(x = 1:Nbin, y = delta_freq_decile_All_resample_freq_matched_B_East, pch = 20, col = 8)
-abline(h = 0, lty = 3)
-title(xlab = "Age bins", mgp = c(6.7, 1, 0), cex.lab = 1.5)
-title(ylab = expression(paste(Delta, " frequency")), mgp = c(2.5, 1, 0), cex.lab = 1.5)
-text(x = my_at + 0.4, y = rep(-0.365, 45), my_names_B_East, srt = 75, xpd = TRUE, cex = 1.25, pos = 2)
-mtext("B East", side = 3, at = 1, line = 0.5, cex = 1.3)
 
-dev.off()
 
 
 
