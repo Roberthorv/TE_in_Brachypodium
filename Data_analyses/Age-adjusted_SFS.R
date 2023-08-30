@@ -646,9 +646,305 @@ delta_freq_decile_All_boot_freq_matched_B_West <- matrix(unlist(sapply(1:n_boot,
 })), nrow = n_boot, ncol = Nbin, byrow = TRUE)
 
 
+## Analyses the snpeff results:
+
+## read in data:
+## B West
+{
+  high_effect_SNPs_B_West.vcf <- read.vcfR("./Bdis326_SNPs_filtered_snpEff_high_effect.vcf", verbose = FALSE )
+  
+  high_effect_SNPs_Bd1_B_West_position <- as.numeric(high_effect_SNPs_B_West.vcf@fix[high_effect_SNPs_B_West.vcf@fix[,1]=="1",2])
+  high_effect_SNPs_Bd1_B_West_age <- Bd1_B_West_merge[Bd1_B_West_merge[,3]%in%high_effect_SNPs_Bd1_B_West_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd2_B_West_position <- as.numeric(high_effect_SNPs_B_West.vcf@fix[high_effect_SNPs_B_West.vcf@fix[,1]=="2",2])
+  high_effect_SNPs_Bd2_B_West_age <- Bd2_B_West_merge[Bd2_B_West_merge[,3]%in%high_effect_SNPs_Bd2_B_West_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd3_B_West_position <- as.numeric(high_effect_SNPs_B_West.vcf@fix[high_effect_SNPs_B_West.vcf@fix[,1]=="3",2])
+  high_effect_SNPs_Bd3_B_West_age <- Bd3_B_West_merge[Bd3_B_West_merge[,3]%in%high_effect_SNPs_Bd3_B_West_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd4_B_West_position <- as.numeric(high_effect_SNPs_B_West.vcf@fix[high_effect_SNPs_B_West.vcf@fix[,1]=="4",2])
+  high_effect_SNPs_Bd4_B_West_age <- Bd4_B_West_merge[Bd4_B_West_merge[,3]%in%high_effect_SNPs_Bd4_B_West_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd5_B_West_position <- as.numeric(high_effect_SNPs_B_West.vcf@fix[high_effect_SNPs_B_West.vcf@fix[,1]=="5",2])
+  high_effect_SNPs_Bd5_B_West_age <- Bd5_B_West_merge[Bd5_B_West_merge[,3]%in%high_effect_SNPs_Bd5_B_West_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_All_B_West_age_full <- as.data.frame(rbind(high_effect_SNPs_Bd1_B_West_age, high_effect_SNPs_Bd2_B_West_age, high_effect_SNPs_Bd3_B_West_age, high_effect_SNPs_Bd4_B_West_age, high_effect_SNPs_Bd5_B_West_age))
+  
+  
+  non_synonymous_B_West.vcf <- read.vcfR("./zero_fold_degenerate_SNP_Bdis326_B_West.vcf", verbose = FALSE )
+  
+  non_synonymous_Bd1_B_West_position <- as.numeric(non_synonymous_B_West.vcf@fix[non_synonymous_B_West.vcf@fix[,1]=="Bd1",2])
+  non_synonymous_Bd1_B_West_age <- Bd1_B_West_merge[Bd1_B_West_merge[,3]%in%non_synonymous_Bd1_B_West_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd2_B_West_position <- as.numeric(non_synonymous_B_West.vcf@fix[non_synonymous_B_West.vcf@fix[,1]=="Bd2",2])
+  non_synonymous_Bd2_B_West_age <- Bd2_B_West_merge[Bd2_B_West_merge[,3]%in%non_synonymous_Bd2_B_West_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd3_B_West_position <- as.numeric(non_synonymous_B_West.vcf@fix[non_synonymous_B_West.vcf@fix[,1]=="Bd3",2])
+  non_synonymous_Bd3_B_West_age <- Bd3_B_West_merge[Bd3_B_West_merge[,3]%in%non_synonymous_Bd3_B_West_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd4_B_West_position <- as.numeric(non_synonymous_B_West.vcf@fix[non_synonymous_B_West.vcf@fix[,1]=="Bd4",2])
+  non_synonymous_Bd4_B_West_age <- Bd4_B_West_merge[Bd4_B_West_merge[,3]%in%non_synonymous_Bd4_B_West_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd5_B_West_position <- as.numeric(non_synonymous_B_West.vcf@fix[non_synonymous_B_West.vcf@fix[,1]=="Bd5",2])
+  non_synonymous_Bd5_B_West_age <- Bd5_B_West_merge[Bd5_B_West_merge[,3]%in%non_synonymous_Bd5_B_West_position, c(1:3, 15, 20)]
+  
+  non_synonymous_All_B_West_age_full <- as.data.frame(rbind(non_synonymous_Bd1_B_West_age, non_synonymous_Bd2_B_West_age, non_synonymous_Bd3_B_West_age, non_synonymous_Bd4_B_West_age, non_synonymous_Bd5_B_West_age))
+  
+}
+## A Italia
+{
+  high_effect_SNPs_A_Italia.vcf <- read.vcfR("./Bdis326_SNPs_filtered_snpEff_high_effect.vcf", verbose = FALSE )
+  
+  high_effect_SNPs_Bd1_A_Italia_position <- as.numeric(high_effect_SNPs_A_Italia.vcf@fix[high_effect_SNPs_A_Italia.vcf@fix[,1]=="1",2])
+  high_effect_SNPs_Bd1_A_Italia_age <- Bd1_A_Italia_merge[Bd1_A_Italia_merge[,3]%in%high_effect_SNPs_Bd1_A_Italia_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd2_A_Italia_position <- as.numeric(high_effect_SNPs_A_Italia.vcf@fix[high_effect_SNPs_A_Italia.vcf@fix[,1]=="2",2])
+  high_effect_SNPs_Bd2_A_Italia_age <- Bd2_A_Italia_merge[Bd2_A_Italia_merge[,3]%in%high_effect_SNPs_Bd2_A_Italia_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd3_A_Italia_position <- as.numeric(high_effect_SNPs_A_Italia.vcf@fix[high_effect_SNPs_A_Italia.vcf@fix[,1]=="3",2])
+  high_effect_SNPs_Bd3_A_Italia_age <- Bd3_A_Italia_merge[Bd3_A_Italia_merge[,3]%in%high_effect_SNPs_Bd3_A_Italia_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd4_A_Italia_position <- as.numeric(high_effect_SNPs_A_Italia.vcf@fix[high_effect_SNPs_A_Italia.vcf@fix[,1]=="4",2])
+  high_effect_SNPs_Bd4_A_Italia_age <- Bd4_A_Italia_merge[Bd4_A_Italia_merge[,3]%in%high_effect_SNPs_Bd4_A_Italia_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd5_A_Italia_position <- as.numeric(high_effect_SNPs_A_Italia.vcf@fix[high_effect_SNPs_A_Italia.vcf@fix[,1]=="5",2])
+  high_effect_SNPs_Bd5_A_Italia_age <- Bd5_A_Italia_merge[Bd5_A_Italia_merge[,3]%in%high_effect_SNPs_Bd5_A_Italia_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_All_A_Italia_age_full <- as.data.frame(rbind(high_effect_SNPs_Bd1_A_Italia_age, high_effect_SNPs_Bd2_A_Italia_age, high_effect_SNPs_Bd3_A_Italia_age, high_effect_SNPs_Bd4_A_Italia_age, high_effect_SNPs_Bd5_A_Italia_age))
+  
+  
+  non_synonymous_A_Italia.vcf <- read.vcfR("./zero_fold_degenerate_SNP_Bdis326_A_Italia.vcf", verbose = FALSE )
+  
+  non_synonymous_Bd1_A_Italia_position <- as.numeric(non_synonymous_A_Italia.vcf@fix[non_synonymous_A_Italia.vcf@fix[,1]=="Bd1",2])
+  non_synonymous_Bd1_A_Italia_age <- Bd1_A_Italia_merge[Bd1_A_Italia_merge[,3]%in%non_synonymous_Bd1_A_Italia_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd2_A_Italia_position <- as.numeric(non_synonymous_A_Italia.vcf@fix[non_synonymous_A_Italia.vcf@fix[,1]=="Bd2",2])
+  non_synonymous_Bd2_A_Italia_age <- Bd2_A_Italia_merge[Bd2_A_Italia_merge[,3]%in%non_synonymous_Bd2_A_Italia_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd3_A_Italia_position <- as.numeric(non_synonymous_A_Italia.vcf@fix[non_synonymous_A_Italia.vcf@fix[,1]=="Bd3",2])
+  non_synonymous_Bd3_A_Italia_age <- Bd3_A_Italia_merge[Bd3_A_Italia_merge[,3]%in%non_synonymous_Bd3_A_Italia_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd4_A_Italia_position <- as.numeric(non_synonymous_A_Italia.vcf@fix[non_synonymous_A_Italia.vcf@fix[,1]=="Bd4",2])
+  non_synonymous_Bd4_A_Italia_age <- Bd4_A_Italia_merge[Bd4_A_Italia_merge[,3]%in%non_synonymous_Bd4_A_Italia_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd5_A_Italia_position <- as.numeric(non_synonymous_A_Italia.vcf@fix[non_synonymous_A_Italia.vcf@fix[,1]=="Bd5",2])
+  non_synonymous_Bd5_A_Italia_age <- Bd5_A_Italia_merge[Bd5_A_Italia_merge[,3]%in%non_synonymous_Bd5_A_Italia_position, c(1:3, 15, 20)]
+  
+  non_synonymous_All_A_Italia_age_full <- as.data.frame(rbind(non_synonymous_Bd1_A_Italia_age, non_synonymous_Bd2_A_Italia_age, non_synonymous_Bd3_A_Italia_age, non_synonymous_Bd4_A_Italia_age, non_synonymous_Bd5_A_Italia_age))
+  
+}
+## A East
+{
+  high_effect_SNPs_A_East.vcf <- read.vcfR("./Bdis326_SNPs_filtered_snpEff_high_effect.vcf", verbose = FALSE )
+  
+  high_effect_SNPs_Bd1_A_East_position <- as.numeric(high_effect_SNPs_A_East.vcf@fix[high_effect_SNPs_A_East.vcf@fix[,1]=="1",2])
+  high_effect_SNPs_Bd1_A_East_age <- Bd1_A_East_merge[Bd1_A_East_merge[,3]%in%high_effect_SNPs_Bd1_A_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd2_A_East_position <- as.numeric(high_effect_SNPs_A_East.vcf@fix[high_effect_SNPs_A_East.vcf@fix[,1]=="2",2])
+  high_effect_SNPs_Bd2_A_East_age <- Bd2_A_East_merge[Bd2_A_East_merge[,3]%in%high_effect_SNPs_Bd2_A_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd3_A_East_position <- as.numeric(high_effect_SNPs_A_East.vcf@fix[high_effect_SNPs_A_East.vcf@fix[,1]=="3",2])
+  high_effect_SNPs_Bd3_A_East_age <- Bd3_A_East_merge[Bd3_A_East_merge[,3]%in%high_effect_SNPs_Bd3_A_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd4_A_East_position <- as.numeric(high_effect_SNPs_A_East.vcf@fix[high_effect_SNPs_A_East.vcf@fix[,1]=="4",2])
+  high_effect_SNPs_Bd4_A_East_age <- Bd4_A_East_merge[Bd4_A_East_merge[,3]%in%high_effect_SNPs_Bd4_A_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd5_A_East_position <- as.numeric(high_effect_SNPs_A_East.vcf@fix[high_effect_SNPs_A_East.vcf@fix[,1]=="5",2])
+  high_effect_SNPs_Bd5_A_East_age <- Bd5_A_East_merge[Bd5_A_East_merge[,3]%in%high_effect_SNPs_Bd5_A_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_All_A_East_age_full <- as.data.frame(rbind(high_effect_SNPs_Bd1_A_East_age, high_effect_SNPs_Bd2_A_East_age, high_effect_SNPs_Bd3_A_East_age, high_effect_SNPs_Bd4_A_East_age, high_effect_SNPs_Bd5_A_East_age))
+  
+  
+  non_synonymous_A_East.vcf <- read.vcfR("./zero_fold_degenerate_SNP_Bdis326_A_East.vcf", verbose = FALSE )
+  
+  non_synonymous_Bd1_A_East_position <- as.numeric(non_synonymous_A_East.vcf@fix[non_synonymous_A_East.vcf@fix[,1]=="Bd1",2])
+  non_synonymous_Bd1_A_East_age <- Bd1_A_East_merge[Bd1_A_East_merge[,3]%in%non_synonymous_Bd1_A_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd2_A_East_position <- as.numeric(non_synonymous_A_East.vcf@fix[non_synonymous_A_East.vcf@fix[,1]=="Bd2",2])
+  non_synonymous_Bd2_A_East_age <- Bd2_A_East_merge[Bd2_A_East_merge[,3]%in%non_synonymous_Bd2_A_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd3_A_East_position <- as.numeric(non_synonymous_A_East.vcf@fix[non_synonymous_A_East.vcf@fix[,1]=="Bd3",2])
+  non_synonymous_Bd3_A_East_age <- Bd3_A_East_merge[Bd3_A_East_merge[,3]%in%non_synonymous_Bd3_A_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd4_A_East_position <- as.numeric(non_synonymous_A_East.vcf@fix[non_synonymous_A_East.vcf@fix[,1]=="Bd4",2])
+  non_synonymous_Bd4_A_East_age <- Bd4_A_East_merge[Bd4_A_East_merge[,3]%in%non_synonymous_Bd4_A_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd5_A_East_position <- as.numeric(non_synonymous_A_East.vcf@fix[non_synonymous_A_East.vcf@fix[,1]=="Bd5",2])
+  non_synonymous_Bd5_A_East_age <- Bd5_A_East_merge[Bd5_A_East_merge[,3]%in%non_synonymous_Bd5_A_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_All_A_East_age_full <- as.data.frame(rbind(non_synonymous_Bd1_A_East_age, non_synonymous_Bd2_A_East_age, non_synonymous_Bd3_A_East_age, non_synonymous_Bd4_A_East_age, non_synonymous_Bd5_A_East_age))
+  
+}
+## B East
+{
+  high_effect_SNPs_B_East.vcf <- read.vcfR("./Bdis326_SNPs_filtered_snpEff_high_effect.vcf", verbose = FALSE )
+  
+  high_effect_SNPs_Bd1_B_East_position <- as.numeric(high_effect_SNPs_B_East.vcf@fix[high_effect_SNPs_B_East.vcf@fix[,1]=="1",2])
+  high_effect_SNPs_Bd1_B_East_age <- Bd1_B_East_merge[Bd1_B_East_merge[,3]%in%high_effect_SNPs_Bd1_B_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd2_B_East_position <- as.numeric(high_effect_SNPs_B_East.vcf@fix[high_effect_SNPs_B_East.vcf@fix[,1]=="2",2])
+  high_effect_SNPs_Bd2_B_East_age <- Bd2_B_East_merge[Bd2_B_East_merge[,3]%in%high_effect_SNPs_Bd2_B_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd3_B_East_position <- as.numeric(high_effect_SNPs_B_East.vcf@fix[high_effect_SNPs_B_East.vcf@fix[,1]=="3",2])
+  high_effect_SNPs_Bd3_B_East_age <- Bd3_B_East_merge[Bd3_B_East_merge[,3]%in%high_effect_SNPs_Bd3_B_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd4_B_East_position <- as.numeric(high_effect_SNPs_B_East.vcf@fix[high_effect_SNPs_B_East.vcf@fix[,1]=="4",2])
+  high_effect_SNPs_Bd4_B_East_age <- Bd4_B_East_merge[Bd4_B_East_merge[,3]%in%high_effect_SNPs_Bd4_B_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_Bd5_B_East_position <- as.numeric(high_effect_SNPs_B_East.vcf@fix[high_effect_SNPs_B_East.vcf@fix[,1]=="5",2])
+  high_effect_SNPs_Bd5_B_East_age <- Bd5_B_East_merge[Bd5_B_East_merge[,3]%in%high_effect_SNPs_Bd5_B_East_position, c(1:3, 15, 20)]
+  
+  high_effect_SNPs_All_B_East_age_full <- as.data.frame(rbind(high_effect_SNPs_Bd1_B_East_age, high_effect_SNPs_Bd2_B_East_age, high_effect_SNPs_Bd3_B_East_age, high_effect_SNPs_Bd4_B_East_age, high_effect_SNPs_Bd5_B_East_age))
+  
+  
+  non_synonymous_B_East.vcf <- read.vcfR("./zero_fold_degenerate_SNP_Bdis326_B_East.vcf", verbose = FALSE )
+  
+  non_synonymous_Bd1_B_East_position <- as.numeric(non_synonymous_B_East.vcf@fix[non_synonymous_B_East.vcf@fix[,1]=="Bd1",2])
+  non_synonymous_Bd1_B_East_age <- Bd1_B_East_merge[Bd1_B_East_merge[,3]%in%non_synonymous_Bd1_B_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd2_B_East_position <- as.numeric(non_synonymous_B_East.vcf@fix[non_synonymous_B_East.vcf@fix[,1]=="Bd2",2])
+  non_synonymous_Bd2_B_East_age <- Bd2_B_East_merge[Bd2_B_East_merge[,3]%in%non_synonymous_Bd2_B_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd3_B_East_position <- as.numeric(non_synonymous_B_East.vcf@fix[non_synonymous_B_East.vcf@fix[,1]=="Bd3",2])
+  non_synonymous_Bd3_B_East_age <- Bd3_B_East_merge[Bd3_B_East_merge[,3]%in%non_synonymous_Bd3_B_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd4_B_East_position <- as.numeric(non_synonymous_B_East.vcf@fix[non_synonymous_B_East.vcf@fix[,1]=="Bd4",2])
+  non_synonymous_Bd4_B_East_age <- Bd4_B_East_merge[Bd4_B_East_merge[,3]%in%non_synonymous_Bd4_B_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_Bd5_B_East_position <- as.numeric(non_synonymous_B_East.vcf@fix[non_synonymous_B_East.vcf@fix[,1]=="Bd5",2])
+  non_synonymous_Bd5_B_East_age <- Bd5_B_East_merge[Bd5_B_East_merge[,3]%in%non_synonymous_Bd5_B_East_position, c(1:3, 15, 20)]
+  
+  non_synonymous_All_B_East_age_full <- as.data.frame(rbind(non_synonymous_Bd1_B_East_age, non_synonymous_Bd2_B_East_age, non_synonymous_Bd3_B_East_age, non_synonymous_Bd4_B_East_age, non_synonymous_Bd5_B_East_age))
+  
+}
 
 
-## add do the same with SNPs
+# only use 10k sites
+high_effect_SNPs_All_B_West_age <- high_effect_SNPs_All_B_West_age_full[sample(1:dim(high_effect_SNPs_All_B_West_age_full)[1], size = 10000, replace = FALSE),]
+non_synonymous_All_B_West_age <- non_synonymous_All_B_West_age_full[sample(1:dim(non_synonymous_All_B_West_age_full)[1], size = 10000, replace = FALSE),]
+high_effect_SNPs_All_A_Italia_age <- high_effect_SNPs_All_A_Italia_age_full ## there are not more than 10k sites
+non_synonymous_All_A_Italia_age <- non_synonymous_All_A_Italia_age_full[sample(1:dim(non_synonymous_All_A_Italia_age_full)[1], size = 10000, replace = FALSE),]
+high_effect_SNPs_All_A_East_age <- high_effect_SNPs_All_A_East_age_full ## there are not more than 10k sites
+non_synonymous_All_A_East_age <- non_synonymous_All_A_East_age_full[sample(1:dim(non_synonymous_All_A_East_age_full)[1], size = 10000, replace = FALSE),]
+high_effect_SNPs_All_B_East_age <- high_effect_SNPs_All_B_East_age_full ## there are not more than 10k sites
+non_synonymous_All_B_East_age <- non_synonymous_All_B_East_age_full[sample(1:dim(non_synonymous_All_B_East_age_full)[1], size = 10000, replace = FALSE),]
+
+
+# downsapled neutral data
+resampled_synonymous_All_age_B_West_high_effect_SNPs <- downsampling.neutral.SNP.function(synonymous_All_B_West_age, high_effect_SNPs_All_B_West_age)
+resampled_synonymous_All_age_B_West_non_synonymous <- downsampling.neutral.SNP.function(synonymous_All_B_West_age, non_synonymous_All_B_West_age)
+resampled_synonymous_All_age_A_Italia_high_effect_SNPs <- downsampling.neutral.SNP.function(synonymous_All_A_Italia_age, high_effect_SNPs_All_A_Italia_age)
+resampled_synonymous_All_age_A_Italia_non_synonymous <- downsampling.neutral.SNP.function(synonymous_All_A_Italia_age, non_synonymous_All_A_Italia_age)
+resampled_synonymous_All_age_A_East_high_effect_SNPs <- downsampling.neutral.SNP.function(synonymous_All_A_East_age, high_effect_SNPs_All_A_East_age)
+resampled_synonymous_All_age_A_East_non_synonymous <- downsampling.neutral.SNP.function(synonymous_All_A_East_age, non_synonymous_All_A_East_age)
+resampled_synonymous_All_age_B_East_high_effect_SNPs <- downsampling.neutral.SNP.function(synonymous_All_B_East_age, high_effect_SNPs_All_B_East_age)
+resampled_synonymous_All_age_B_East_non_synonymous <- downsampling.neutral.SNP.function(synonymous_All_B_East_age, non_synonymous_All_B_East_age)
+
+
+## sort data 
+high_effect_SNPs_All_age_sorted_B_West <- high_effect_SNPs_All_B_West_age[order(high_effect_SNPs_All_B_West_age$PostMode), ]
+resampled_synonymous_All_age_sorted_B_West_high_effect_SNPs <- resampled_synonymous_All_age_B_West_high_effect_SNPs[order(resampled_synonymous_All_age_B_West_high_effect_SNPs[,5]),]
+non_synonymous_All_age_sorted_B_West <- non_synonymous_All_B_West_age[order(non_synonymous_All_B_West_age$PostMode), ]
+resampled_synonymous_All_age_sorted_B_West_non_synonymous <- resampled_synonymous_All_age_B_West_non_synonymous[order(resampled_synonymous_All_age_B_West_non_synonymous[,5]),]
+high_effect_SNPs_All_age_sorted_A_Italia <- high_effect_SNPs_All_A_Italia_age[order(high_effect_SNPs_All_A_Italia_age$PostMode), ]
+resampled_synonymous_All_age_sorted_A_Italia_high_effect_SNPs <- resampled_synonymous_All_age_A_Italia_high_effect_SNPs[order(resampled_synonymous_All_age_A_Italia_high_effect_SNPs[,5]),]
+non_synonymous_All_age_sorted_A_Italia <- non_synonymous_All_A_Italia_age[order(non_synonymous_All_A_Italia_age$PostMode), ]
+resampled_synonymous_All_age_sorted_A_Italia_non_synonymous <- resampled_synonymous_All_age_A_Italia_non_synonymous[order(resampled_synonymous_All_age_A_Italia_non_synonymous[,5]),]
+high_effect_SNPs_All_age_sorted_A_East <- high_effect_SNPs_All_A_East_age[order(high_effect_SNPs_All_A_East_age$PostMode), ]
+resampled_synonymous_All_age_sorted_A_East_high_effect_SNPs <- resampled_synonymous_All_age_A_East_high_effect_SNPs[order(resampled_synonymous_All_age_A_East_high_effect_SNPs[,5]),]
+non_synonymous_All_age_sorted_A_East <- non_synonymous_All_A_East_age[order(non_synonymous_All_A_East_age$PostMode), ]
+resampled_synonymous_All_age_sorted_A_East_non_synonymous <- resampled_synonymous_All_age_A_East_non_synonymous[order(resampled_synonymous_All_age_A_East_non_synonymous[,5]),]
+high_effect_SNPs_All_age_sorted_B_East <- high_effect_SNPs_All_B_East_age[order(high_effect_SNPs_All_B_East_age$PostMode), ]
+resampled_synonymous_All_age_sorted_B_East_high_effect_SNPs <- resampled_synonymous_All_age_B_East_high_effect_SNPs[order(resampled_synonymous_All_age_B_East_high_effect_SNPs[,5]),]
+non_synonymous_All_age_sorted_B_East <- non_synonymous_All_B_East_age[order(non_synonymous_All_B_East_age$PostMode), ]
+resampled_synonymous_All_age_sorted_B_East_non_synonymous <- resampled_synonymous_All_age_B_East_non_synonymous[order(resampled_synonymous_All_age_B_East_non_synonymous[,5]),]
+
+
+## get delta frequency:
+delta_freq_decile_All_resample_B_West_high_effect_SNPs <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_B_West_high_effect_SNPs, high_effect_SNPs_All_age_sorted_B_West, my_bonderies_B_West)
+delta_freq_decile_All_resample_B_West_non_synonymous <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_B_West_non_synonymous, non_synonymous_All_age_sorted_B_West, my_bonderies_B_West)
+delta_freq_decile_All_resample_A_Italia_high_effect_SNPs <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_A_Italia_high_effect_SNPs, high_effect_SNPs_All_age_sorted_A_Italia, my_bonderies_A_Italia)
+delta_freq_decile_All_resample_A_Italia_non_synonymous <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_A_Italia_non_synonymous, non_synonymous_All_age_sorted_A_Italia, my_bonderies_A_Italia)
+delta_freq_decile_All_resample_A_East_high_effect_SNPs <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_A_East_high_effect_SNPs, high_effect_SNPs_All_age_sorted_A_East, my_bonderies_A_East)
+delta_freq_decile_All_resample_A_East_non_synonymous <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_A_East_non_synonymous, non_synonymous_All_age_sorted_A_East, my_bonderies_A_East)
+delta_freq_decile_All_resample_B_East_high_effect_SNPs <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_B_East_high_effect_SNPs, high_effect_SNPs_All_age_sorted_B_East, my_bonderies_B_East)
+delta_freq_decile_All_resample_B_East_non_synonymous <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_sorted_B_East_non_synonymous, non_synonymous_All_age_sorted_B_East, my_bonderies_B_East)
+
+
+## bootstrapping
+delta_freq_decile_All_boot_B_West_high_effect_SNPs <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- high_effect_SNPs_All_B_West_age[sample(1:dim(high_effect_SNPs_All_B_West_age)[1], dim(high_effect_SNPs_All_B_West_age)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_B_West_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_B_West)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+delta_freq_decile_All_boot_B_West_non_synonymous <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- non_synonymous_All_age_sorted_B_West[sample(1:dim(non_synonymous_All_age_sorted_B_West)[1], dim(non_synonymous_All_age_sorted_B_West)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_B_West_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_B_West)
+  print(x/n_boot)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+delta_freq_decile_All_boot_A_Italia_high_effect_SNPs <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- high_effect_SNPs_All_A_Italia_age[sample(1:dim(high_effect_SNPs_All_A_Italia_age)[1], dim(high_effect_SNPs_All_A_Italia_age)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_A_Italia_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_A_Italia)
+  print(x/n_boot)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+delta_freq_decile_All_boot_A_Italia_non_synonymous <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- non_synonymous_All_age_sorted_A_Italia[sample(1:dim(non_synonymous_All_age_sorted_A_Italia)[1], dim(non_synonymous_All_age_sorted_A_Italia)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_A_Italia_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_A_Italia)
+  print(x/n_boot)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+delta_freq_decile_All_boot_A_East_high_effect_SNPs <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- high_effect_SNPs_All_A_East_age[sample(1:dim(high_effect_SNPs_All_A_East_age)[1], dim(high_effect_SNPs_All_A_East_age)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_A_East_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_A_East)
+  print(x/n_boot)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+delta_freq_decile_All_boot_A_East_non_synonymous <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- non_synonymous_All_age_sorted_A_East[sample(1:dim(non_synonymous_All_age_sorted_A_East)[1], dim(non_synonymous_All_age_sorted_A_East)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_A_East_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_A_East)
+  print(x/n_boot)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+delta_freq_decile_All_boot_B_East_high_effect_SNPs <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- high_effect_SNPs_All_B_East_age[sample(1:dim(high_effect_SNPs_All_B_East_age)[1], dim(high_effect_SNPs_All_B_East_age)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_B_East_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_B_East)
+  print(x/n_boot)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+delta_freq_decile_All_boot_B_East_non_synonymous <- matrix(unlist(sapply(1:n_boot, function(x){
+  Retrotransposons_All_age_resample <- non_synonymous_All_age_sorted_B_East[sample(1:dim(non_synonymous_All_age_sorted_B_East)[1], dim(non_synonymous_All_age_sorted_B_East)[1], replace = TRUE),]
+  resampled_synonymous_All_age_resample <- downsampling.neutral.SNP.function(synonymous_All_B_East_age, Retrotransposons_All_age_resample)
+  Retrotransposons_All_age_resample_sorted <- Retrotransposons_All_age_resample[order(Retrotransposons_All_age_resample$PostMode), ]
+  resampled_synonymous_All_age_resample_sorted <- resampled_synonymous_All_age_resample[order(resampled_synonymous_All_age_resample[,5]),]
+  delta_freq_decile_All_resample <- decile.delta.age.fix.decile.size.variable.n.bin.function(resampled_synonymous_All_age_resample_sorted, Retrotransposons_All_age_resample_sorted, my_bonderies_B_East)
+  print(x/n_boot)
+  return(delta_freq_decile_All_resample)
+})), nrow = n_boot, ncol = Nbin, byrow = TRUE)
+
+
 
 
 
