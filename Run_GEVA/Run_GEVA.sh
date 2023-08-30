@@ -35,3 +35,108 @@ for i in  $(ls Phased_Pol_SNPs_TE_Bd*_*.vcf)
 do 
 gzip $i
 done
+
+## run geva:
+## example using the A_East clade
+## data convertion GEVA:
+
+./GEVA/geva-master/geva_v1beta --vcf Phased_Pol_SNPs_TE_Bd1_A_East.vcf.gz --map ./Bdistachyon_genetic_map_chr1.txt --out Bd1_A_East
+./GEVA/geva-master/geva_v1beta --vcf Phased_Pol_SNPs_TE_Bd2_A_East.vcf.gz --map ./Bdistachyon_genetic_map_chr2.txt --out Bd2_A_East
+./GEVA/geva-master/geva_v1beta --vcf Phased_Pol_SNPs_TE_Bd3_A_East.vcf.gz --map ./Bdistachyon_genetic_map_chr3.txt --out Bd3_A_East
+./GEVA/geva-master/geva_v1beta --vcf Phased_Pol_SNPs_TE_Bd4_A_East.vcf.gz --map ./Bdistachyon_genetic_map_chr4.txt --out Bd4_A_East
+./GEVA/geva-master/geva_v1beta --vcf Phased_Pol_SNPs_TE_Bd5_A_East.vcf.gz --map ./Bdistachyon_genetic_map_chr5.txt --out Bd5_A_East
+
+## make a list of the site possitions and remove first and last position as they cause problems
+zcat Phased_Pol_SNPs_TE_Bd1_A_East.vcf.gz | cut -f 2 | sed '1,62d' | sed '$ d' > Bd1_A_East_pos_list
+zcat Phased_Pol_SNPs_TE_Bd2_A_East.vcf.gz | cut -f 2 | sed '1,62d' | sed '$ d' > Bd2_A_East_pos_list
+zcat Phased_Pol_SNPs_TE_Bd3_A_East.vcf.gz | cut -f 2 | sed '1,62d' | sed '$ d' > Bd3_A_East_pos_list
+zcat Phased_Pol_SNPs_TE_Bd4_A_East.vcf.gz | cut -f 2 | sed '1,62d' | sed '$ d' > Bd4_A_East_pos_list
+zcat Phased_Pol_SNPs_TE_Bd5_A_East.vcf.gz | cut -f 2 | sed '1,62d' | sed '$ d' > Bd5_A_East_pos_list
+
+## Split the position files in smaller files to be able to run GEVA more efficiently:
+for i in {1..167}
+do
+START=`expr  \( $i - 1 \) \* 5000 + 1`
+END=`expr 5000 \* $i`
+sed -n "${START},${END}p"  Bd1_A_East_pos_list > Bd1_A_East_pos_list_${START}_${END}
+done
+
+for i in {1..143}
+do
+START=`expr  \( $i - 1 \) \* 5000 + 1`
+END=`expr 5000 \* $i`
+sed -n "${START},${END}p"  Bd2_A_East_pos_list > Bd2_A_East_pos_list_${START}_${END}
+done
+
+for i in {1..153}
+do
+START=`expr  \( $i - 1 \) \* 5000 + 1`
+END=`expr 5000 \* $i`
+sed -n "${START},${END}p"  Bd3_A_East_pos_list > Bd3_A_East_pos_list_${START}_${END}
+done
+
+for i in {1..106}
+do
+START=`expr  \( $i - 1 \) \* 5000 + 1`
+END=`expr 5000 \* $i`
+sed -n "${START},${END}p"  Bd4_A_East_pos_list > Bd4_A_East_pos_list_${START}_${END}
+done
+
+for i in {1..69}
+do
+START=`expr  \( $i - 1 \) \* 5000 + 1`
+END=`expr 5000 \* $i`
+sed -n "${START},${END}p"  Bd5_A_East_pos_list > Bd5_A_East_pos_list_${START}_${END}
+done
+
+## estimate age
+## using the Run_GEVA_age_estimate.lsf script
+ls Bd1_A_East_pos_list_* > GEVA_list_of_position_files.txt
+ls Bd2_A_East_pos_list_* >> GEVA_list_of_position_files.txt
+ls Bd3_A_East_pos_list_* >> GEVA_list_of_position_files.txt
+ls Bd4_A_East_pos_list_* >> GEVA_list_of_position_files.txt
+ls Bd5_A_East_pos_list_* >> GEVA_list_of_position_files.txt
+
+bsub < ./Run_GEVA_age_estimate.lsf -J "GEVA[1-638]"
+
+## merge result files:
+head -1 Bd1_A_East_400001_405000.sites2.txt > header.sites2.txt
+
+for j in  Bd1 Bd2 Bd3 Bd4 Bd5
+do
+
+for i in  $(ls header.sites2.txt ${j}_A_East_*0.sites2.txt | sort -r)
+do
+if [ $i == "header.sites2.txt" ]
+then
+cat $i
+else
+grep " J " $i
+fi
+done > ${j}_A_East_Clock_J_age_estimate.sites2.txt
+
+for i in  $(ls header.sites2.txt ${j}_A_East_*0.sites2.txt | sort -r)
+do
+if [ $i == "header.sites2.txt" ]
+then
+cat $i
+else
+grep " M " $i
+fi
+done > ${j}_A_East_Clock_M_age_estimate.sites2.txt
+
+for i in  $(ls header.sites2.txt ${j}_A_East_*0.sites2.txt | sort -r)
+do
+if [ $i == "header.sites2.txt" ]
+then
+cat $i
+else
+grep " R " $i
+fi
+done > ${j}_A_East_Clock_R_age_estimate.sites2.txt
+
+done
+
+
+
+
