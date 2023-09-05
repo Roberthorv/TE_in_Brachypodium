@@ -86,25 +86,25 @@ Biallelic_Full_clean_TIP_TAP_Sample_table_326_samples <- Full_clean_TIP_TAP_Samp
 
 ## All clade age
 {
-  Bd1_All_clusters_Clock_J_age_estimate <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd1_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
+  Bd1_All_clusters_Clock_J_age_estimate <- read.table("./Bd1_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
   colnames(Bd1_All_clusters_Clock_J_age_estimate) <- c("MarkerID", "Clock", "N_Concordant", "N_Discordant", "PostMode")
-  Bd1_All_clusters.marker <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd1_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
+  Bd1_All_clusters.marker <- read.table("./Bd1_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
   
-  Bd2_All_clusters_Clock_J_age_estimate <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd2_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
+  Bd2_All_clusters_Clock_J_age_estimate <- read.table("./Bd2_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
   colnames(Bd2_All_clusters_Clock_J_age_estimate) <- c("MarkerID", "Clock", "N_Concordant", "N_Discordant", "PostMode")
-  Bd2_All_clusters.marker <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd2_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
+  Bd2_All_clusters.marker <- read.table("./Bd2_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
   
-  Bd3_All_clusters_Clock_J_age_estimate <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd3_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
+  Bd3_All_clusters_Clock_J_age_estimate <- read.table("./Bd3_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
   colnames(Bd3_All_clusters_Clock_J_age_estimate) <- c("MarkerID", "Clock", "N_Concordant", "N_Discordant", "PostMode")
-  Bd3_All_clusters.marker <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd3_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
+  Bd3_All_clusters.marker <- read.table("./Bd3_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
   
-  Bd4_All_clusters_Clock_J_age_estimate <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd4_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
+  Bd4_All_clusters_Clock_J_age_estimate <- read.table("./Bd4_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
   colnames(Bd4_All_clusters_Clock_J_age_estimate) <- c("MarkerID", "Clock", "N_Concordant", "N_Discordant", "PostMode")
-  Bd4_All_clusters.marker <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd4_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
+  Bd4_All_clusters.marker <- read.table("./Bd4_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
   
-  Bd5_All_clusters_Clock_J_age_estimate <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd5_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
+  Bd5_All_clusters_Clock_J_age_estimate <- read.table("./Bd5_full_A_B_cluster_Clock_J_age_estimate.sites2.txt", sep = " ", header = FALSE, stringsAsFactors = FALSE)
   colnames(Bd5_All_clusters_Clock_J_age_estimate) <- c("MarkerID", "Clock", "N_Concordant", "N_Discordant", "PostMode")
-  Bd5_All_clusters.marker <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/GEVA/All_clusters/Bd5_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
+  Bd5_All_clusters.marker <- read.table("./Bd5_full_A_B_cluster.marker.txt", sep = " ", header = TRUE, stringsAsFactors = FALSE)
   
   Bd1_All_clusters_merge <- merge(Bd1_All_clusters.marker, Bd1_All_clusters_Clock_J_age_estimate, by = "MarkerID")
   Bd2_All_clusters_merge <- merge(Bd2_All_clusters.marker, Bd2_All_clusters_Clock_J_age_estimate, by = "MarkerID")
@@ -226,15 +226,7 @@ for (t in TEs_in_regions_of_interest_B_East_ID) {
 colnames(TEs_in_regions_of_interest_B_East_raw) <- c("CHR", "Start", "End", "ID", "TE_Superfamily", "Freq", "Age")
 TEs_in_regions_of_interest_B_East <- TEs_in_regions_of_interest_B_East_raw[TEs_in_regions_of_interest_B_East_raw[,6] != "0" & !is.na(TEs_in_regions_of_interest_B_East_raw[,7]),]
 
-
-
-
 ## age splits: 
-## AB split: 52000 generation ago
-## B split: 22000 generation ago
-## A split: 18000 generation ago
-
-
 ## Old > 60000 generation 
 ## Intermediate < 60000 & > 10000 generation 
 ## Young < 10000 generation 
@@ -248,7 +240,6 @@ for (i in 1:dim(Fixed_TE_proportion_in_iHS)[1]) {
   my_start <- unlist(strsplit(Fixed_TE_proportion_in_iHS[i,1], split = "_"))[2]
   my_end <- unlist(strsplit(Fixed_TE_proportion_in_iHS[i,1], split = "_"))[3]
   my_tab_name <- paste0("TEs_in_regions_of_interest_", my_clade)
-  
   
   my_run_tab <- get(my_tab_name)[get(my_tab_name)[,1] == my_scaff &
                                    as.numeric(get(my_tab_name)[,2]) >= as.numeric(my_start) &
@@ -293,19 +284,14 @@ for (i in 1:dim(Fixed_TE_proportion_in_iHS)[1]) {
       Fixed_TE_proportion_in_iHS[i,3] <- 1
       Fixed_TE_proportion_in_iHS[i,2] <- sum(my_run_tab_age[6] == 1 )/1
     }
-
   }
-  
- 
   print(i/dim(Fixed_TE_proportion_in_iHS)[1])
   
 }
 
-
-## write.table(Fixed_TE_proportion_in_iHS, file = "/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/R_Input/Fixed_TE_proportion_in_iHS.txt", quote = FALSE, sep = "\t")
-
+write.table(Fixed_TE_proportion_in_iHS, file = "./Fixed_TE_proportion_in_iHS.txt", quote = FALSE, sep = "\t")
 ## read in data table
-Fixed_TE_proportion_in_iHS_df <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/R_Input/Fixed_TE_proportion_in_iHS.txt", sep = "\t", header = TRUE, stringsAsFactors = TRUE)
+Fixed_TE_proportion_in_iHS_df <- read.table("./Fixed_TE_proportion_in_iHS.txt", sep = "\t", header = TRUE, stringsAsFactors = TRUE)
 
 Fixed_TE_proportion_in_iHS_df[1:5,]
 Fixed_TE_proportion_in_iHS_df_b <- Fixed_TE_proportion_in_iHS_df
@@ -320,40 +306,22 @@ ancova_model_fix_number <- aov(Number_of_fixed_TEs ~ Total_number_of_TEs + Hihg_
 summary(ancova_model_fix_number)
 Anova(ancova_model_fix_number, type="III")
 
-
 ## the residuals of the model are ruffly normally distributed
 hist(resid(aov(Number_of_fixed_TEs ~ Total_number_of_TEs + Hihg_iHS + Clade + TE_Superfamily + Region + TE_age, data = Fixed_TE_proportion_in_iHS_df_b)), breaks = seq(-20,15,0.5))
 
-
-
-## Hihg iHS is not effecting the number of fixed TEs
-## But the tree most important factors based on the Sum sq are:
-## Total_number_of_TEs, TE_Superfamily and Clade
-
 cor(Fixed_TE_proportion_in_iHS_df_b$Total_number_of_TEs, Fixed_TE_proportion_in_iHS_df_b$Number_of_fixed_TEs)
-## the more TEs there are the more are fixed
 
 library(multcomp)
 postHocs_fix_number_TE_Superfamily <- glht(ancova_model_fix_number, linfct = mcp(TE_Superfamily = "Tukey"))
 summary(postHocs_fix_number_TE_Superfamily)
-## TEs are behaving differently in different families
 
 postHocs_fix_number_Clade <- glht(ancova_model_fix_number, linfct = mcp(Clade = "Tukey"))
 summary(postHocs_fix_number_Clade)
-## the number of fixed TEs correlates with Ne
 
 postHocs_fix_number_iHS <- glht(ancova_model_fix_number, linfct = mcp(Hihg_iHS = "Tukey"))
 summary(postHocs_fix_number_iHS)
 
-
-
-
-
-##################################################################################
-##############           Analyes the freqeuncy of the TEs           ##############
-##################################################################################
-
-
+### Analyes the freqeuncy of the TEs
 ## make a table with each TEs per clade per line
 
 ## make the table
@@ -402,10 +370,9 @@ for (t in TE_ID_LIST) {
 ## select only TEs in high iHS regions:
 Frequency_TE_in_high_iHS <- Frequency_TE_in_iHS[grepl(pattern = "Bd", Frequency_TE_in_iHS[,7]),]
 
-## write.table(Frequency_TE_in_high_iHS, file = "/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/R_Input/Frequency_TE_in_high_iHS.txt", quote = FALSE, sep = "\t")
-
+write.table(Frequency_TE_in_high_iHS, file = "./Frequency_TE_in_high_iHS.txt", quote = FALSE, sep = "\t")
 ## read in data table
-Frequency_TE_in_high_iHS_df <- read.table("/Users/roberthorvath/Desktop/Projects/1) TEs_in_Brachypodium/4) Results/R_Input/Frequency_TE_in_high_iHS.txt", sep = "\t", header = TRUE, stringsAsFactors = TRUE)
+Frequency_TE_in_high_iHS_df <- read.table("./Frequency_TE_in_high_iHS.txt", sep = "\t", header = TRUE, stringsAsFactors = TRUE)
 
 ## select only polymorphic TEs
 Frequency_poly_TE_in_high_iHS_df <- Frequency_TE_in_high_iHS_df[Frequency_TE_in_high_iHS_df[,2] != 0 & Frequency_TE_in_high_iHS_df[,2] != 1,]
@@ -440,31 +407,14 @@ Anova(ancova_model_poly_TE_age_bin, type="III")
 ## the residuals of the model are ruffly normally distributed
 hist(resid(aov(Frequency ~ iHS + Clade + TE_Superfamily + Regoin + Age, data = Frequency_poly_TE_in_high_iHS_age_bin_df)), breaks = seq(-1.5,1.5,0.1))
 
-
-## Hihg iHS is not effecting ...
-## But the tree most important factors based on the Sum sq are:
-## TE_Superfamily, Clade and Region
-
 library(multcomp)
 postHocs_poly_TE_age_bin_TE_Superfamily <- glht(ancova_model_poly_TE_age_bin, linfct = mcp(TE_Superfamily = "Tukey"))
 summary(postHocs_poly_TE_age_bin_TE_Superfamily)
-## TEs are behaving differently in different families
 
 postHocs_poly_TE_age_bin_Clade <- glht(ancova_model_poly_TE_age_bin, linfct = mcp(Clade = "Tukey"))
 summary(postHocs_poly_TE_age_bin_Clade)
-## the patter here is not as clear as before with the fixed TEs
 
 postHocs_poly_TE_age_bin_Age <- glht(ancova_model_poly_TE_age_bin, linfct = mcp(Age = "Tukey"))
 summary(postHocs_poly_TE_age_bin_Age)
-## only young TEs are less frequent than intermediate TEs
-
-postHocs_poly_TE_age_bin_Region <- glht(ancova_model_poly_TE_age_bin, linfct = mcp(Regoin = "Tukey"))
-summary(postHocs_poly_TE_age_bin_Region)
-## to many variables...
-
-postHocs_poly_TE_age_bin_iHS <- glht(ancova_model_poly_TE_age_bin, linfct = mcp(iHS = "Tukey"))
-summary(postHocs_poly_TE_age_bin_iHS)
-## 
-
 
 
