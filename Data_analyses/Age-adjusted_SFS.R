@@ -944,14 +944,3 @@ delta_freq_decile_All_boot_B_East_non_synonymous <- matrix(unlist(sapply(1:n_boo
   return(delta_freq_decile_All_resample)
 })), nrow = n_boot, ncol = Nbin, byrow = TRUE)
 
-
-
-
-
-
-
-
-
-
-
-
