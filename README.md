@@ -3,6 +3,7 @@ Custom scripts used in Horvath et al. 2023, "The evolution of transposable eleme
 
 
 Scripts to get the TE calls are in TE_calling
+
 Scripts used to filter and format TE calls are in Data_processing
 Scripts to run GEVA are in Run_GEVA
 Scripts to merge vcf files are in vcf_merging
