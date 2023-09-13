@@ -2,6 +2,8 @@
 Custom scripts used in Horvath et al. 2023, "The evolution of transposable elements in Bradychopium distachyon is governed by purifying selection, while neutral and adaptive processes play a minor role".
 
 
+
+
 Scripts to get the TE calls are in TE_calling
 
 Scripts used to filter and format TE calls are in Data_processing
