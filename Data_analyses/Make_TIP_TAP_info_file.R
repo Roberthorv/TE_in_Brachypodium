@@ -1,6 +1,7 @@
 ## read in needed data
 TE_info_consensus_family <- read.table("./TE_info_with_consensus_family.txt", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
-Used_TIP_TAP_in_vcf <- read.table("./Bdis332_clean_TE_call_TEPID_position_ID.txt", header = FALSE)
+Full_clean_TIP_TAP_Sample_table_342_samples <- read.table("./Full_clean_TIP_TAP_Sample_table_342_samples.txt", sep = "\t", header = TRUE)
+Used_TIP_TAP_in_vcf <- Full_clean_TIP_TAP_Sample_table_342_samples[,c(1,2,4)]
 
 
 TIP_TAP_in_vcf_info_bed <- Used_TIP_TAP_in_vcf[,c(1,2,2,3)]
