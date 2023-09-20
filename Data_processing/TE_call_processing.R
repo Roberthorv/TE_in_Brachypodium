@@ -69,7 +69,7 @@ Full_TIP_TAP_Sample_table[,343] <- rownames(Full_TIP_TAP_Sample_table)
 
 # Make a TE info table
 TE_info <- as.data.frame(matrix(NA, nrow = sum(dim(insertions)[1], dim(deletions)[1]), ncol = 8))
-colnames(TE_info) <- c("Scaffold", "Start_position", "End_position", "TE_ID", "TE_name", "TE_Superfamily", "Note_1", "Note_2")
+colnames(TE_info) <- c("Scaffold", "Start_position", "End_position", "TE_ID", "TE_name", "TE_family", "Note_1", "Note_2")
 TE_info$TE_ID <- c(insertions$ID, deletions$ID)
 TE_info$Scaffold <- c(insertions$Scaffold, deletions$Scaffold)
 TE_info$Start_position <- c(insertions$Insertion_site_lower_estimate, deletions$Start_position)
