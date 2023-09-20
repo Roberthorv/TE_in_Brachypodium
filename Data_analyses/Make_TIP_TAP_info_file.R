@@ -37,26 +37,9 @@ for (i in 1:dim(TIP_TAP_in_vcf_info_bed)[1]) {
     
   }
   
-  my_TE_fam_b <- unique(unlist(strsplit(as.character(my_info[9]), split = ",")))
-  my_TE_fam <- my_TE_fam_b[my_TE_fam_b != "NA"]
-  if (length(my_TE_fam) < 1) {
-    my_TE_fam <- NA
-  }
-  
   TIP_TAP_in_vcf_info_bed[i,5] <- my_TE_class
   TIP_TAP_in_vcf_info_bed[i,6] <- paste(my_TE_sup, collapse = ",")
-  TIP_TAP_in_vcf_info_bed[i,7] <- paste(my_TE_fam, collapse = ",")
 }
-
-TIP_TAP_in_vcf_info_bed[grepl(pattern = ",", x = TIP_TAP_in_vcf_info_bed[,6]) & TIP_TAP_in_vcf_info_bed[,7]!= "NA",7] <- "NA"
-
-TIP_TAP_in_vcf_info_bed[is.na(TIP_TAP_in_vcf_info_bed[,5]) & TIP_TAP_in_vcf_info_bed[,7]!= "NA",c(5,6,7)]
-TIP_TAP_in_vcf_info_bed[is.na(TIP_TAP_in_vcf_info_bed[,5]) & TIP_TAP_in_vcf_info_bed[,7]!= "NA",5] <- "Retrotransposon"
-
-
-TIP_TAP_in_vcf_info_bed[TIP_TAP_in_vcf_info_bed[,6]== "NA" & TIP_TAP_in_vcf_info_bed[,7]!= "NA" & grepl(pattern = "RLC", x = TIP_TAP_in_vcf_info_bed[,7]),c(5,6,7)]
-TIP_TAP_in_vcf_info_bed[TIP_TAP_in_vcf_info_bed[,6]== "NA" & TIP_TAP_in_vcf_info_bed[,7]!= "NA" & grepl(pattern = "RLC", x = TIP_TAP_in_vcf_info_bed[,7]),6] <- "LTR/Copia"
-TIP_TAP_in_vcf_info_bed[TIP_TAP_in_vcf_info_bed[,6]== "NA" & TIP_TAP_in_vcf_info_bed[,7]!= "NA" & grepl(pattern = "RLG", x = TIP_TAP_in_vcf_info_bed[,7]),6] <- "LTR/Gypsy"
 
 write.table(TIP_TAP_in_vcf_info_bed, file = "./TIP_TAP_in_vcf_info.bed", sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
