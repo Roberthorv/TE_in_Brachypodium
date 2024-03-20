@@ -1,6 +1,7 @@
 # TE in Brachypodium
 Custom scripts used in:
-Robert HorvathNikolaos MinadakisYann BourgeoisAnne C. Roulin2023The evolution of transposable elements in Brachypodium distachyon is governed by purifying selection, while neutral and adaptive processes play a minor roleeLife12:RP93284
+
+Robert Horvath, Nikolaos Minadakis, Yann Bourgeois, Anne C. Roulin. (2023) The evolution of transposable elements in Brachypodium distachyon is governed by purifying selection, while neutral and adaptive processes play a minor role eLife 12:RP93284
 
 
   
